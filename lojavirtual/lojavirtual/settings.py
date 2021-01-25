@@ -40,10 +40,12 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     # apps de terceiros
     'debug_toolbar',
+    "widget_tweaks",
     # my apps
     'users.apps.UsersConfig',
     'pages.apps.PagesConfig',
     "products.apps.ProductsConfig",
+    "cart.apps.CartConfig",
 ]
 
 MIDDLEWARE = [
@@ -90,7 +92,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql',
         'NAME':'lojavirtual',
         'USER': 'root',
-        'PASSWORD': 'reis587',
+        'PASSWORD': '0212',
         'HOST': 'localhost',
         'PORT': '3306'
     }
@@ -150,3 +152,8 @@ MEDIA_ROOT = BASE_DIR / 'media'
 
 #hostname, _, ips = socket.gethostbyname_ex(socket.gethostname())
 #INTERNAL_IPS = [ip[:-1] + "1" for ip in ips]
+
+#Cart 
+
+CART_SESSION_ID = "cart"
+CART_ITEM_MAX_QUANTITY = 20
