@@ -1,0 +1,43 @@
+{% extends "blog/base_blog.html" %}
+
+{% block post_entries %}
+
+    {% for post in object_list %}
+
+    <article class="blog-post">
+        <h2 class="blog-post-title">{{ post.titulo }}</h2>
+        <p class="blog-post-meta">{{ post.data_criado }} | Autor: {{ post.autor }}</a></p>
+
+        <p>{{ post.texto|truncatechars:200 }}</p>
+
+        <p><a href="{% url 'blog:post' pk=post.pk %}">Continue lendo...</a></p>
+      </article><!-- /.blog-post -->
+   
+   {% endfor %}
+   
+   
+  
+   <!--nav class="blog-pagination" aria-label="Pagination">
+    <a class="btn btn-outline-primary" href="#">Older</a>
+    <a class="btn btn-outline-secondary disabled" href="#" tabindex="-1" aria-disabled="true">Newer</a>
+  </nav-->
+
+<div class="pagination">
+    <span class="step-links">
+        {% if page_obj.has_previous %}
+            <a class="btn btn-outline-primary" href="?page=1">&laquo; primeira</a>
+            <a class="btn btn-outline-primary" href="?page={{ page_obj.previous_page_number }}">anterior</a>
+        {% endif %}
+
+        <span class="current">
+            Página {{ page_obj.number }} de {{ page_obj.paginator.num_pages }}.
+        </span>
+
+        {% if page_obj.has_next %}
+            <a class="btn btn-outline-primary" href="?page={{ page_obj.next_page_number }}">próxima</a>
+            <a class="btn btn-outline-primary" href="?page={{ page_obj.paginator.num_pages }}">última &raquo;</a>
+        {% endif %}
+    </span>
+</div>
+
+{% endblock post_entries %}

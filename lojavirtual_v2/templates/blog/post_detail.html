@@ -1,0 +1,25 @@
+{% extends "blog/base_blog.html" %}
+
+{% block post_entries %}
+
+    <div class="post">
+        <h2>{{ post.titulo }}</h2>
+        <p class="meta"> {{ post.data_criado }} | Autor: {{ post.autor }}</p>
+        {{ post.texto }}
+        </p>
+    </div>
+
+    <a  href="{% url 'blog:comentario_novo' pk=post.pk %}">Comentar</a>
+
+    {% for comentario in object.comentario_set.all %}
+        <div class="comments">
+            <div class="date">
+                {{comentario.autor}} 
+                ({{ comentario.likes }}) <a href="{% url 'blog:comentario_like' pk=comentario.pk %}">Like</a> | 
+                ({{ comentario.unlikes }}) <a href="{% url 'blog:comentario_unlike' pk=comentario.pk %}">Dislike</a>
+            </div>
+            <p> {{ comentario.texto }}</p>
+        </div>
+    {% endfor %}
+
+{% endblock post_entries %}
