@@ -5,7 +5,7 @@ from . import models
 
 class PostAdmin (admin.ModelAdmin):
     list_display = ('titulo', 'publicado', 'autor', 'data_criado')
-    fields = ('titulo', 'publicado', 'texto')
+    fields = ('titulo', 'publicado', 'texto', 'link_media')
     list_filter = ('autor',)
     
     def save_model(self, request, obj, form, change):

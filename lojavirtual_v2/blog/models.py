@@ -8,6 +8,7 @@ class Post (models.Model):
     publicado = models.BooleanField(default=False)
     data_criado = models.DateTimeField(auto_now_add=True)
     autor = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.PROTECT, null=True)
+    link_media = models.CharField(max_length=300, null=True)
 
     def __str__ (self):
         return self.titulo
@@ -28,3 +29,5 @@ class Comentario (models.Model):
 
     def unlike (self):
         self.unlikes += 1
+
+    
