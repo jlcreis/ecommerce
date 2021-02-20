@@ -45,3 +45,8 @@ class Product(TimeStampedModel):
 
     def get_absolute_url(self):
         return reverse("products:detail", kwargs={"slug": self.slug})       
+
+class Images(models.Model):
+    product = models.ForeignKey('Product', on_delete=models.CASCADE)
+    image = models.ImageField(upload_to="products/%Y/%m/%d", blank=True)
+

@@ -1,13 +1,16 @@
-from cart.forms import CartAddProductForm
+#from cart.forms import CartAddProductForm
 from django.shortcuts import get_object_or_404
 from django.views.generic import DetailView, ListView
 
-from .models import Category, Product
+from .models import Category, Product, Images
 
 
 class ProductDetailView(DetailView):
-    queryset = Product.available.all()
-    extra_context = {"form": CartAddProductForm()}
+    
+    #extra_context = {"form": CartAddProductForm()}
+    def get_queryset(self):
+        queryset = Product.available.all()
+        return queryset
 
 
 class ProductListView(ListView):

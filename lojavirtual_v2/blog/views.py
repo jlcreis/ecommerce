@@ -13,7 +13,6 @@ class BlogIndex (ListView):
 
     def get_queryset(self):
         queryset = Post.objects.all()
-        print ("blog passou")
         return queryset
 
 class BlogDetail (DetailView):
