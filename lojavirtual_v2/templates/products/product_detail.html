@@ -11,7 +11,29 @@
     <div class="row">
         <div class="col-lg-3 mb-3 mb-lg-0">
             {% if product.image %}
-            <img class="container-fluid" src="/media/{{product.image}}" alt="">
+            <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+                <ol class="carousel-indicators">
+                {% for image in object.images_set.all %}
+                  <li data-target="#carouselExampleIndicators" data-slide-to="{{image.id}}" {% if image.id == 1 %} class="active" {% endif %}></li>
+                {% endfor %}
+                </ol>
+                <div class="carousel-inner" style="height: 10rem; width: 100%;" >
+                {% for image in object.images_set.all %}
+                
+                  <div class="carousel-item {% if image.id == 1 %} active {% endif %}">
+                    <img src="/media/{{image.image}}" class="container-fluid" alt="...">
+                  </div>
+                {% endfor %}
+                </div>
+                <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+                  <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                  <span class="sr-only">Previous</span>
+                </a>
+                <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+                  <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                  <span class="sr-only">Next</span>
+                </a>
+            </div>
             {% else %}
             <img class="card-img-top" src="{% static 'images/no_image.jpg' %}" alt="">
             {% endif %}
@@ -41,8 +63,8 @@
     </div>
 </div>
 
-{% for image in object.images_set.all %}
-<img class="container-fluid" src="/media/{{image.image}}" alt="">
-{% endfor %}
+
+
 
 {% endblock content %}
+
