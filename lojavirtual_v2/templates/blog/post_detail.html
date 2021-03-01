@@ -1,13 +1,20 @@
 {% extends "blog/base_blog.html" %}
 
 {% block post_entries %}
-
+    
     <div class="post">
         <h2>{{ post.titulo }}</h2>
-        <p class="meta"> {{ post.data_criado }} | Autor: {{ post.autor }}</p>
-        {{ post.texto }}
-        </p>
-        {% if post.link_media != null %}
+        <p class="meta"> {{ post.data_criado }}</p>
+        
+        {% if post.image %}
+        <div style="text-align: center;">
+          <img src="/media/{{ post.image }}" class="img-fluid" alt="...">
+        </div>
+        {% endif %}
+
+        <p>{{ post.texto }}</p>
+        
+        {% if post.link_media %}
         <div class="embed-responsive embed-responsive-16by9">
             <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/{{ post.link_media }}" allowfullscreen></iframe>
           </div>
@@ -43,7 +50,10 @@
           </div>
         </div>
     </div>
-    
-   
+    <p style="text-align: center;">
+      <a class="text-decoration-none" href="{% url 'blog:index' %}">
+        Voltar
+      </a>
+    </p>
 
 {% endblock post_entries %}

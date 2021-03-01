@@ -8,7 +8,8 @@ class Post (models.Model):
     publicado = models.BooleanField(default=False)
     data_criado = models.DateTimeField(auto_now_add=True)
     autor = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.PROTECT, null=True)
-    link_media = models.CharField(max_length=300, null=True)
+    link_media = models.CharField(max_length=300, null=True, blank=True)
+    image = models.ImageField(upload_to="blog/%Y/%m/%d", blank=True)
 
     def __str__ (self):
         return self.titulo

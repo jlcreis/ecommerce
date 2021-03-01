@@ -1,0 +1,26 @@
+
+.carousel-inner {
+    height: 70vh;
+}
+
+.carousel-inner > .active {
+    background-color: white !important;
+    border-color:white !important;  
+}
+/*centraliza a imagem no carousel */
+.carousel-item > img {
+    height: 70vh;
+    width: 100%;
+    object-fit: contain;
+}
+/* cor do indicador de imagem do carousel */
+.carousel-indicators > .active {
+    border-color: transparent !important;
+    background-color: rebeccapurple !important;
+}
+
+/*
+.carousel-item > .center {
+    text-align: center;
+}
+*/

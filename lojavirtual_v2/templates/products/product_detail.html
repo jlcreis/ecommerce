@@ -3,25 +3,28 @@
 {% load static %}
 {% load widget_tweaks %}
 
+{% block css %}
+<link rel="stylesheet" href="{% static 'css/product_datail.css' %}" />
+{% endblock css %}
+
 {% block title %}{{ product.name }}{% endblock title %}
 
 {% block content %}
 
 <div class="container my-3">
     <div class="row">
-        <div class="col-lg-3 mb-3 mb-lg-0">
+        <div class="col-lg-7 mb-3 mb-lg-0">
             {% if product.image %}
             <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
                 <ol class="carousel-indicators">
                 {% for image in object.images_set.all %}
-                  <li data-target="#carouselExampleIndicators" data-slide-to="{{image.id}}" {% if image.id == 1 %} class="active" {% endif %}></li>
+                  <li data-target="#carouselExampleIndicators" data-slide-to="{{image.id}}" {% if forloop.first %} class="active" {% endif %}></li>
                 {% endfor %}
                 </ol>
-                <div class="carousel-inner" style="height: 10rem; width: 100%;" >
+                <div class="carousel-inner">
                 {% for image in object.images_set.all %}
-                
-                  <div class="carousel-item {% if image.id == 1 %} active {% endif %}">
-                    <img src="/media/{{image.image}}" class="container-fluid" alt="...">
+                  <div class="carousel-item {% if forloop.first %} active {% endif %}">
+                    <img src="/media/{{image.image}}" class="center" alt="...">
                   </div>
                 {% endfor %}
                 </div>
@@ -38,10 +41,15 @@
             <img class="card-img-top" src="{% static 'images/no_image.jpg' %}" alt="">
             {% endif %}
         </div>
-        <div class="col-lg-9">
+        <div class="col-lg-5">
             <h1 class="font-weight-bold">{{ product.name }}</h1>
             <h2>R$ {{ product.price }}</h2>
             <p>{{ product.description }}</p>
+
+            {% if product.link_venda %}
+              <a href="{{ product.link_venda }}" target="blank"><span class="badge badge-danger">Comprar</span></a>
+            {% endif %}
+
             <!---
             <form class="form-group" action="{% url 'cart:add' product.id %}" method="post">
                 <p class="form-inline">
