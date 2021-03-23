@@ -1,0 +1,97 @@
+{% extends 'base.html' %}
+
+{% load static %}
+{% load widget_tweaks %}
+
+{% block css %}
+<link rel="stylesheet" href="{% static 'css/loja.css' %}">
+{% endblock css %}
+
+{% block title %}{{ product.name }}{% endblock title %}
+
+{% block content %}
+
+<div class="container">
+    <!--destaques 01-->
+    <div class="detalhes">
+        <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+            <ol class="carousel-indicators">
+                {% for product in promocao_list %}
+                <li data-target="#carouselExampleIndicators" data-slide-to="{{image.id}}" {% if forloop.first %}
+                    class="active" {% endif %}></li>
+                {% endfor %}
+            </ol>
+            <div class="carousel-inner">
+                {% for  product in promocao_list %}
+                <div class="carousel-item {% if forloop.first %} active {% endif %}">
+                    <a href="sale/{{ product.slug }}">
+                        <img src="/media/{{product.image}}" class="center" alt="..." style="height: 50vh;width: 100%;">
+                    </a>
+                </div>
+                {% endfor %}
+            </div>
+            <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="sr-only">Previous</span>
+            </a>
+            <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="sr-only">Next</span>
+            </a>
+        </div>
+    </div>
+    <!--destaques 02-->
+    <div class="container">
+        <div class="row detalhes">
+            {% for  product in product_list %}
+            <div class="col-sm-3">
+                <a href="{{ product.get_absolute_url }}" style="color: black;">
+                    <div class="card" style="height: 20rem;">
+                        <img src="/media/{{product.image}}" class="card-img-top" alt="...">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ product.name }}</h5>
+                            <p class="card-text">{{ product.description|truncatechars:50  }}</p>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+    
+    <!--div class="row">
+        <div class="col-sm-1">
+            <button id="back" class="btn">
+                <img src="{% static 'icones/seta.png' %}" class="img-thumbnail" alt="...">
+            </button>
+        </div>
+        <div class="col-sm-10">
+            <div id="scrollSection" class="scrollmenu">
+                <a href="#home"><img src="{% static 'icones/agulha.png' %}" class="img-thumbnail" alt="..."></a>
+                <a href="#news"><img src="{% static 'icones/carretel.png' %}" class="img-thumbnail" alt="..."></a>
+                <a href="#contact"><img src="{% static 'icones/novelo.png' %}" class="img-thumbnail" alt="..."></a>
+                <a href="#about"><img src="{% static 'icones/novelo02.png' %}" class="img-thumbnail" alt="..."></a>
+                <a href="#about"><img src="{% static 'icones/trico.png' %}" class="img-thumbnail" alt="..."></a>
+                <a href="#about"><img src="{% static 'icones/novelo02.png' %}" class="img-thumbnail" alt="..."></a>
+                <a href="#about"><img src="{% static 'icones/trico.png' %}" class="img-thumbnail" alt="..."></a>
+                <a href="#home"><img src="{% static 'icones/agulha.png' %}" class="img-thumbnail" alt="..."></a>
+                <a href="#news"><img src="{% static 'icones/carretel.png' %}" class="img-thumbnail" alt="..."></a>
+                <a href="#contact"><img src="{% static 'icones/novelo.png' %}" class="img-thumbnail" alt="..."></a>
+                <a href="#about"><img src="{% static 'icones/novelo02.png' %}" class="img-thumbnail" alt="..."></a>
+                <a href="#about"><img src="{% static 'icones/trico.png' %}" class="img-thumbnail" alt="..."></a>
+                <a href="#about"><img src="{% static 'icones/novelo02.png' %}" class="img-thumbnail" alt="..."></a>
+                <a href="#about"><img src="{% static 'icones/trico.png' %}" class="img-thumbnail" alt="..."></a>
+            </div>
+        </div>
+        <div class="col-sm-1">
+            <button id="next" class="btn">
+                <img src="{% static 'icones/seta.png' %}" class="img-thumbnail" alt="...">
+            </button>
+        </div>
+    </div-->
+</div>
+{% endblock content %}
+
+{% block scripts %}
+<script src="{% static 'js/scroll_horizontal.js' %}"></script>
+{% endblock scripts %}

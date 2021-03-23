@@ -1,0 +1,27 @@
+.banner {
+    height: 20vh;
+    width:100%;
+    /*background-color:bisque;*/
+    
+}
+.banner > .logo {
+    text-align: center;
+    display: flex;
+    display: -webkit-flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.banner > .logo img {   
+    max-height: 20vh;
+}
+
+@media(max-width: 700px){
+    .row > .col-sm-2 {display: none;}
+}
+
+  @media (min-width: 768px) {
+    .bd-placeholder-img-lg {
+      font-size: 3.5rem;
+    }
+  }

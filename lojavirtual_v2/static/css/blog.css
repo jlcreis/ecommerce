@@ -21,6 +21,15 @@
   .display-4 {
     font-size: 2.5rem;
   }
+  .destaques{
+    margin-top: 2rem;
+  }
+
+  .bg-destaque {
+    background-color:#89287e ;
+    color:white;
+  }
+
   @media (min-width: 768px) {
     .display-4 {
       font-size: 3rem;
@@ -87,4 +96,5 @@
     margin-bottom: 1.25rem;
     color: #727272;
   }
+  
  
