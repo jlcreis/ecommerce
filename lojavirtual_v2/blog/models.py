@@ -1,4 +1,5 @@
 from django.db import models
+from marcador import models as app_marcador
 from django.conf import settings
 
 # Create your models here.
@@ -31,4 +32,9 @@ class Comentario (models.Model):
     def unlike (self):
         self.unlikes += 1
 
+class Post_Marcador(models.Model):
+    marcador = models.ForeignKey(
+        app_marcador.Marcador, related_name="post_marcadors", on_delete=models.CASCADE
+    )
+    ppost = models.ForeignKey('Post', on_delete=models.CASCADE)
     

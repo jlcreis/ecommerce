@@ -1,6 +1,7 @@
 from django.contrib import admin
+from marcador.models import Marcador
+from .models import Category, Product, Images, Sale, Sale_Product, Product_Marcador
 
-from .models import Category, Product, Images, Sale, Sale_Product
 
 @admin.register(Category)
 class CategoryAdmin(admin.ModelAdmin):
@@ -9,6 +10,10 @@ class CategoryAdmin(admin.ModelAdmin):
 class ImagesInline(admin.TabularInline):
     #list_display = ['id','product']
     model = Images
+
+class Product_MarcadorInline(admin.TabularInline):
+    model = Product_Marcador
+
 
 @admin.register(Product)
 class ProductAdmin(admin.ModelAdmin):
@@ -25,6 +30,7 @@ class ProductAdmin(admin.ModelAdmin):
     list_editable = ['price', 'is_available']
     # exclude = ['image']
     inlines = [ImagesInline]
+    inlines = [Product_MarcadorInline]
 
     def get_images(self, obj):
         return obj.images_get

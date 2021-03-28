@@ -1,20 +1,20 @@
 
-.carousel-inner {
+.promocao > .carousel-inner {
     height: 50vh;
 }
 
-.carousel-inner > .active {
+.promocao > .carousel-inner > .active {
     background-color: white !important;
     border-color:white !important;  
 }
 /*centraliza a imagem no carousel carousel-item > img*/
-.center {
+.promocao > .center {
     height: 50vh;
     width: 100%;
     /*object-fit: contain;*/
 }
 /* cor do indicador de imagem do carousel */
-.carouselExampleControls > .active {
+.promocao > .carouselExampleControls > .active {
     border-color: transparent !important;
     background-color: rebeccapurple !important;
 }

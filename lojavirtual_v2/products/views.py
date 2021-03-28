@@ -19,6 +19,7 @@ class ProductHomeView(TemplateView):
         context = super().get_context_data(**kwargs)
         context['promocao_list'] = Sale.available.all()
         context['product_list'] = Product.available.all()[:4]
+        context["categories"] = Category.objects.all()
         return context
 
 class ProductListView(ListView):

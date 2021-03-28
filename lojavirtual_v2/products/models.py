@@ -1,7 +1,9 @@
 from autoslug import AutoSlugField #instalado de terceiros
+from marcador import models as app_marcador
 from django.db import models
 from django.urls import reverse
 from model_utils.models import TimeStampedModel #instalado de terceiros (cria data de criação em alteração)
+
 
 class AvailableManager(models.Manager):
     def get_queryset(self):
@@ -77,7 +79,9 @@ class Sale_Product(models.Model):
     sale = models.ForeignKey('Sale', on_delete=models.CASCADE)
     product = models.ForeignKey('Product', on_delete=models.CASCADE)
     objects = models.Manager()
-    
 
-
-
+class Product_Marcador(models.Model):
+    marcador = models.ForeignKey(
+        app_marcador.Marcador, related_name="product_marcadors", on_delete=models.CASCADE
+    )
+    product = models.ForeignKey('Product', on_delete=models.CASCADE)
