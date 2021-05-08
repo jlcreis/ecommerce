@@ -15,62 +15,51 @@
     <!--link rel="stylesheet" href="{% static 'css/style.css' %}" /-->
     <link rel="stylesheet" href="{% static 'css/estilo.css' %}">
     {% block css %}{% endblock css %}
-    <title>{% block title %}LusArtes{% endblock title %}</title>
+    <title>LusArtes {% block title %}{% endblock title %}</title>
 </head>
 
 <body class="d-flex flex-column min-vh-100">
     <!--header-->
     <div class="logo">
         <div class="row banner">
-            <div class="col-sm-2 logo">
+            <!--div class="col-sm-2 logo">
                 <img src="{% static 'images/logo0002.png' %}" alt="Lu's Artes">
-            </div>
+            </div-->
             <div class="col-sm logo">
                 <img src="{% static 'images/logo001.png' %}" alt="Lu's Artes">
             </div>
-            <div class="col-sm-2 logo">
-            </div>
+            <!--div class="col-sm-2 logo">
+            </div-->
         </div>
     </div>
     <!--/header-->
 
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <!--a class="navbar-brand" href="#">Navbar</a-->
+    <nav class="navbar navbar-expand-lg navbar-light estilo-nav">
+        <a class="navbar-brand" href="#">
+            <img src="{% static 'images/logo001.png' %}"  height="30" alt="">
+        </a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
             aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
-
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
-                <li class="nav-item active">
-                    <a class="nav-link" href="{% url 'blog:index' %}">Home <span class="sr-only">(current)</span></a>
+                <!--li class="nav-item {% if request.path ==  '/products/' %} active {%endif%}">
+                    <a class="nav-link" href="{% url 'products:home' %}">Home <span class="sr-only">(current)</span></a>
+                </li-->
+                <li class="nav-item {% if request.path ==  '/products/' %} active {%endif%}">
+                    <a class="nav-link" href="{% url 'products:home' %}">Novidades</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Imagens</a>
+                {% for cat in categories %}
+                <li class="nav-item {% if request.path ==  cat.get_absolute_url  %} active {%endif%}">
+                <a class="nav-link" href="{{ cat.get_absolute_url }}">{{ cat.name }}</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Vídeos</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{% url 'products:home' %}">Loja</a>
-                </li>
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
-                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    </a>
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" href="{% url 'products:list' %}">Todas as categorias</a>
-                        <a class="dropdown-item" href="{% url 'products:list' %}">Tricô</a>
-                        <a class="dropdown-item" href="#">Bordado</a>
-                        <a class="dropdown-item" href="#">Crochê</a>
-                        <a class="dropdown-item" href="#">Pintura</a>
-                    </div>
-                </li>
+                {% endfor %}
+               
             </ul>
-            <form class="form-inline my-2 my-lg-0">
-                <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+            <form class="form-inline my-2 my-lg-0" method="GET" action="{% url 'products:list' %}">
+                <input class="form-control mr-sm-2" type="search" name="procurar" placeholder="Encontre aqui o que precisa" aria-label="Search" value="{{ request.GET.search }}">
+                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Buscar</button>
             </form>
         </div>
     </nav>

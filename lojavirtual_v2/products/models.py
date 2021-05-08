@@ -16,8 +16,8 @@ class Category(TimeStampedModel):
 
     class Meta:
         ordering = ('name',)
-        verbose_name = 'category' 
-        verbose_name_plural = 'categories'
+        verbose_name = 'categoria' 
+        verbose_name_plural = 'categorias'
 
     def __str__(self):
         return self.name
@@ -37,22 +37,58 @@ class Product(TimeStampedModel):
     price = models.DecimalField(max_digits=10, decimal_places=2)
     is_available = models.BooleanField(default=True)
     link_venda = models.CharField(max_length=300, null=True, blank=True)
+    nota = models.IntegerField (default=0)
+    likes = models.IntegerField(default=0)
 
     objects = models.Manager()
     available = AvailableManager()
 
     class Meta:
-        ordering = ("name",)
+        ordering = ("-created",)
+        verbose_name = 'produto'
+        verbose_name_plural = 'produtos'
 
     def __str__(self):
         return self.name
 
     def get_absolute_url(self):
-        return reverse("products:detail", kwargs={"slug": self.slug})       
+        return reverse("products:detail", kwargs={"slug": self.slug})     
+
+    def like (self):
+        self.likes += 1  
+
+class Comentario(TimeStampedModel):
+    product = models.ForeignKey('Product', on_delete=models.CASCADE)
+    autor = models.CharField(max_length=100)
+    texto = models.TextField()
+    likes = models.IntegerField(default=0)
+    unlikes = models.IntegerField(default=0)
+    data_criado = models.DateTimeField(auto_now_add=True)
+    is_available = models.BooleanField(default=False)
+    
+    objects = models.Manager()
+    available = AvailableManager()
+
+    class Meta:
+        ordering = ("-data_criado",)
+
+    def __str__ (self):
+        return self.autor + " - " + str (id)
+
+    def like (self):
+        self.likes += 1
+
+    def unlike (self):
+        self.unlikes += 1
+
 
 class Images(models.Model):
     product = models.ForeignKey('Product', on_delete=models.CASCADE)
     image = models.ImageField(upload_to="products/%Y/%m/%d", blank=True)
+
+    class Meta:
+        verbose_name = 'imagem'
+        verbose_name_plural = 'imagens'
 
 class Sale(TimeStampedModel):
     name = models.CharField(max_length=100, unique=True)
@@ -65,9 +101,9 @@ class Sale(TimeStampedModel):
     available = AvailableManager()
 
     class Meta:
-        ordering = ('name',)
-        verbose_name = 'sale' 
-        verbose_name_plural = 'sales'
+        ordering = ('-created',)
+        verbose_name = 'promoção' 
+        verbose_name_plural = 'promoções'
 
     def __str__(self):
         return self.name
@@ -80,8 +116,14 @@ class Sale_Product(models.Model):
     product = models.ForeignKey('Product', on_delete=models.CASCADE)
     objects = models.Manager()
 
+    class Meta:
+        verbose_name = 'produtos por promoção'
+
 class Product_Marcador(models.Model):
     marcador = models.ForeignKey(
         app_marcador.Marcador, related_name="product_marcadors", on_delete=models.CASCADE
     )
     product = models.ForeignKey('Product', on_delete=models.CASCADE)
+
+    class Meta:
+        verbose_name = 'produtos por marcador'

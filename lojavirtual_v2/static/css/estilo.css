@@ -1,3 +1,15 @@
+body{
+  background-color: #E6E6FA;
+}
+
+.estilo-nav{
+  background-color: #bf97c7;
+}
+
+.container{
+  padding-top: 2%;
+}
+
 .banner {
   height: 20vh;
   width: 100%;
@@ -13,6 +25,7 @@
   align-items: center;
 }
 
+
 .banner>.logo img {
   max-height: 20vh;
 }
@@ -21,11 +34,18 @@
   .row>.col-sm-2 {
     display: none;
   }
+  .logo {
+    display: none;
+  }
+  
 }
 
-@media (min-width: 768px) {
+@media (min-width: 701px) {
   .bd-placeholder-img-lg {
     font-size: 3.5rem;
+  }
+  .navbar-brand{
+    display:none;
   }
 }
 

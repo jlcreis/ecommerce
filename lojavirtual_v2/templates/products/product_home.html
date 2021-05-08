@@ -8,9 +8,11 @@
 <link rel="stylesheet" href="{% static 'css/carousel_cards.css' %}">
 {% endblock css %}
 
-{% block title %}{{ product.name }}{% endblock title %}
+
 
 {% block content %}
+
+
 
 <div class="container">
     <!--Promoções-->
@@ -37,85 +39,71 @@
     </div>
     <!--Destques-->
     <div class="container">
-        <div class="row detalhes">
-            {% for  product in product_list %}
-            <div class="col-sm-3">
-                <a href="{{ product.get_absolute_url }}" style="color: black;">
-                    <div class="card" style="height: 20rem;">
-                        <img src="/media/{{product.image}}" class="card-img-top" alt="...">
-                        <div class="card-body">
-                            <h5 class="card-title">{{ product.name }}</h5>
-                            <p class="card-text">{{ product.description|truncatechars:50  }}</p>
-                        </div>
-                    </div>
+        <div class="card-deck">
+            {% for product in product_list_novidade %}
+            <div class="card">
+              <a href="{{ product.get_absolute_url }}">
+                {% if product.image %}
+                <img class="card-img-top" src="/media/{{product.image}}" alt="">
+                {% else %}
+                <img class="card-img-top" src="{% static 'images/no_image.jpg' %}" alt="">
+                {% endif %}
+              </a>
+              <div class="card-body d-flex flex-column justify-content-between">
+                <a class="text-decoration-none text-dark" href="{{ product.get_absolute_url }}">
+                  <h5 class="card-title">{{ product.name }}</h5>
+                  <p class="card-text">{{ product.description|truncatechars:50  }}</p>
                 </a>
+              </div>
             </div>
+            {% endfor %}
+          </div>
+    </div>
+    <!--Categoira-->
+    <div class="container">
+        <div class="row detalhes categoria_destaque"">
+            {% for  product in product_list_categoria %}
+            <div class="card mb-3" style="max-width: 540px;">
+                <div class="row no-gutters">
+                  <div class="col-md-4">
+                    <img src="/media/{{product.image}}" class="card-img-top" alt="...">
+                  </div>
+                  <div class="col-md-8">
+                    <div class="card-body">
+                    <a href="{{ product.get_absolute_url }}" style="color: black;">
+                      <h5 class="card-title">{{ product.name }}</h5>
+                      <p class="card-text">{{ product.description|truncatechars:50  }}</p>
+                    </a>
+                    </div>
+                  </div>
+                </div>
+              </div>
             {% endfor %}
         </div>
     </div>
     
-    <!--div class="row">
-        <div class="col-sm-1">
-            <button id="back" class="btn">
-                <img src="{% static 'icones/seta.png' %}" class="img-thumbnail" alt="...">
-            </button>
-        </div>
-        <div class="col-sm-10">
-            <div id="scrollSection" class="scrollmenu">
-                <a href="#home"><img src="{% static 'icones/agulha.png' %}" class="img-thumbnail" alt="..."></a>
-                <a href="#news"><img src="{% static 'icones/carretel.png' %}" class="img-thumbnail" alt="..."></a>
-                <a href="#contact"><img src="{% static 'icones/novelo.png' %}" class="img-thumbnail" alt="..."></a>
-                <a href="#about"><img src="{% static 'icones/novelo02.png' %}" class="img-thumbnail" alt="..."></a>
-                <a href="#about"><img src="{% static 'icones/trico.png' %}" class="img-thumbnail" alt="..."></a>
-                <a href="#about"><img src="{% static 'icones/novelo02.png' %}" class="img-thumbnail" alt="..."></a>
-                <a href="#about"><img src="{% static 'icones/trico.png' %}" class="img-thumbnail" alt="..."></a>
-                <a href="#home"><img src="{% static 'icones/agulha.png' %}" class="img-thumbnail" alt="..."></a>
-                <a href="#news"><img src="{% static 'icones/carretel.png' %}" class="img-thumbnail" alt="..."></a>
-                <a href="#contact"><img src="{% static 'icones/novelo.png' %}" class="img-thumbnail" alt="..."></a>
-                <a href="#about"><img src="{% static 'icones/novelo02.png' %}" class="img-thumbnail" alt="..."></a>
-                <a href="#about"><img src="{% static 'icones/trico.png' %}" class="img-thumbnail" alt="..."></a>
-                <a href="#about"><img src="{% static 'icones/novelo02.png' %}" class="img-thumbnail" alt="..."></a>
-                <a href="#about"><img src="{% static 'icones/trico.png' %}" class="img-thumbnail" alt="..."></a>
+    <!--Preço-->
+    <div class="container">
+        <div class="card-deck">
+            {% for product in product_list_preco %}
+            <div class="card">
+              <a href="{{ product.get_absolute_url }}">
+                {% if product.image %}
+                <img class="card-img-top" src="/media/{{product.image}}" alt="">
+                {% else %}
+                <img class="card-img-top" src="{% static 'images/no_image.jpg' %}" alt="">
+                {% endif %}
+              </a>
+              <div class="card-body d-flex flex-column justify-content-between">
+                <a class="text-decoration-none text-dark" href="{{ product.get_absolute_url }}">
+                  <h5 class="card-title">{{ product.name }}</h5>
+                  <p class="card-text">{{ product.description|truncatechars:50  }}</p>
+                </a>
+              </div>
             </div>
-        </div>
-        <div class="col-sm-1">
-            <button id="next" class="btn">
-                <img src="{% static 'icones/seta.png' %}" class="img-thumbnail" alt="...">
-            </button>
-        </div>
-    </div-->
-    
-<div class="container">
-    <div class="row mx-auto my-auto">
-        <div id="recipeCarousel" class="carousel slide w-100" data-ride="carousel" data-interval="false">
-            <div class="carousel-inner carousel-inner-cards w-100" role="listbox">
-                {% for  categoria in categories %}
-                <div class="carousel-item carousel_card {% if forloop.first %} active {% endif %}">
-                    <div class="col-md-4">
-                        <div class="card card-body">
-                            <a href="{{ categoria.get_absolute_url }}" style="color: black;">
-                                {% if categoria.image %}
-                                <img src="/media/{{categoria.image}}" class="img-thumbnail" alt="{{ categoria.name }}" style="width: 300px;">
-                                {% else %}
-                                <img class="img-thumbnail" alt="{{ categoria.name }}" style="width: 300px;" src="{% static 'images/no_image.jpg' %}" alt="{{ categoria.name }}">
-                                {% endif %}
-                            </a>
-                        </div>
-                    </div>
-                </div>
-                {% endfor %}
-            </div>
-            <a class="carousel-control-prev w-auto" href="#recipeCarousel" role="button" data-slide="prev">
-                <span class="carousel-control-prev-icon bg-dark border border-dark rounded-circle" aria-hidden="true"></span>
-                <span class="sr-only">Previous</span>
-            </a>
-            <a class="carousel-control-next w-auto" href="#recipeCarousel" role="button" data-slide="next">
-                <span class="carousel-control-next-icon bg-dark border border-dark rounded-circle" aria-hidden="true"></span>
-                <span class="sr-only">Next</span>
-            </a>
-        </div>
+            {% endfor %}
+          </div>
     </div>
-</div>
 
 </div>
 {% endblock content %}

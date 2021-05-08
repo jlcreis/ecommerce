@@ -19,6 +19,14 @@
     background-color: rebeccapurple !important;
 }
 
+.detalhes {
+    padding-top: 2%;
+}
+
+.card > img {
+    height: 20vh;
+    width: auto;
+}
 /*
 .carousel-item > .center {
     text-align: center;

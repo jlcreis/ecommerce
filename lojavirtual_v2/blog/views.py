@@ -19,6 +19,9 @@ class PostList (ListView):
     paginate_by = 3
     def get_queryset(self):
         queryset = Post.objects.all()
+        busca = self.request.GET.get("procurar")
+        if busca:
+            queryset = queryset.filter(titulo__icontains = busca)
         return queryset
 
 class BlogDetail (DetailView):

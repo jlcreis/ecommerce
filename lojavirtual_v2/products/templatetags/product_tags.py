@@ -4,4 +4,4 @@ register = template.Library()
 
 @register.filter()
 def remainder(n):
-    return n % 3
+    return n % 4

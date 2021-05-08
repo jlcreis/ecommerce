@@ -6,5 +6,6 @@ app_name = 'pages'
 urlpatterns = [
     path('about/', AboutPageView.as_view(), name='about'),
     #path('', HomePageView.as_view(), name='home'),
-    path('', include("blog.urls")),
+    #path('', include("blog.urls")),
+    path('', include ('products.urls')),
 ]
