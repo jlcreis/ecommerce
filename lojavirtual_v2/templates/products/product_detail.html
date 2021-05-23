@@ -9,8 +9,6 @@
 
 {% block title %}- {{ product.name }}{% endblock title %}
 
-
-
 {% block content %}
 
 <div class="container my-3">
@@ -54,22 +52,10 @@
       <a href="{{ product.link_venda }}" target="blank"><span class="badge badge-success"
           style="font-size: 200%;">COMPRAR</span></a>
       {% endif %}
-
-      <!---
-            <form class="form-group" action="{% url 'cart:add' product.id %}" method="post">
-                <p class="form-inline">
-                    {{ form.quantity.label_tag }}
-                    {% render_field form.quantity class+="form-control ml-sm-3" %}
-                    {{ form.override }}
-                </p>
-                {% csrf_token %}
-                <input class="btn btn-success" type="submit" value="Adicionar ao Carrinho">
-            </form>
-            -->
       <p>
-        Ver o catálogo de
+        
         <a class="text-decoration-none" href="{{ product.category.get_absolute_url }}">
-          {{ product.category.name }}
+          Encontre mais produtos semelhantes.
         </a>
       </p>
     </div>
@@ -77,6 +63,7 @@
   <div style="padding-top: 2%;">
     <div class="card">
       <div class="card-body">
+        <h5 class="card-title">Descricão</h5>
         <p class="card-text">{{ product.description }}</p>
       </div>
     </div>
@@ -84,7 +71,7 @@
 
   <div class="card">
     <div class="card-body">
-      <a href="{% url 'products:comentario_novo' pk=product.pk %}">Deixe seu comentário comentário</a>
+      <a href="{% url 'products:comentario_novo' pk=product.pk %}">Deixe seu comentário</a>
     </div>
   </div>
   <div id="accordion">
@@ -93,7 +80,8 @@
         <h5 class="mb-0">
           <button class="btn btn-link" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true"
             aria-controls="collapseOne">
-            Comentários
+            Comentários 
+            <i class="bi-chevron-compact-down" role="img" aria-label="chevron-compact-down"></i>
           </button>
         </h5>
       </div>

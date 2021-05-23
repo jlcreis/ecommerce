@@ -4,7 +4,7 @@ from django.urls import reverse
 from django.views.generic import DetailView, ListView, TemplateView
 from django.shortcuts import render
 from .forms import ComentarioForm
-
+from marcador.models import Marcador
 from .models import Category, Product, Images, Sale, Sale_Product, Comentario
 
 
@@ -30,7 +30,7 @@ class ProductHomeView(TemplateView):
         context = super().get_context_data(**kwargs)
         context['promocao_list'] = Sale.available.all()
         context['product_list_novidade'] = Product.available.all()[:4]
-        context['product_list_preco'] = Product.available.all()[:4]
+        context['product_list_preco'] = Product.objects.order_by("price")[:4]
         context['product_list_categoria'] = Product.available.all()[:2]
         context["categories"] = Category.objects.all()
         return context
@@ -44,11 +44,10 @@ class ProductListView(ListView):
         category_slug = self.kwargs.get("slug")
         busca = self.request.GET.get("procurar")
 
-        print(category_slug)
-        print(busca)
-
         if busca:
-            queryset = queryset.filter(name__icontains = busca)
+            self.sss = Marcador.objects.filter(nome__contains = busca)
+            print(self.sss)
+            queryset = queryset.filter(name__contains = busca)
 
         if category_slug:
             self.category = get_object_or_404(Category, slug=category_slug)

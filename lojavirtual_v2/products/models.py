@@ -124,6 +124,7 @@ class Product_Marcador(models.Model):
         app_marcador.Marcador, related_name="product_marcadors", on_delete=models.CASCADE
     )
     product = models.ForeignKey('Product', on_delete=models.CASCADE)
+    objects = models.Manager()
 
     class Meta:
         verbose_name = 'produtos por marcador'

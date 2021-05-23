@@ -39,6 +39,7 @@
     </div>
     <!--Destques-->
     <div class="container">
+      <h2>Destaques</h2>
         <div class="card-deck">
             {% for product in product_list_novidade %}
             <div class="card">
@@ -52,14 +53,15 @@
               <div class="card-body d-flex flex-column justify-content-between">
                 <a class="text-decoration-none text-dark" href="{{ product.get_absolute_url }}">
                   <h5 class="card-title">{{ product.name }}</h5>
-                  <p class="card-text">{{ product.description|truncatechars:50  }}</p>
+                  <p class="card-text">R${{ product.price }}</p>
+                  <!--p class="card-text">{{ product.description|truncatechars:50  }}</p-->
                 </a>
               </div>
             </div>
             {% endfor %}
           </div>
     </div>
-    <!--Categoira-->
+    <!--Categoira>
     <div class="container">
         <div class="row detalhes categoria_destaque"">
             {% for  product in product_list_categoria %}
@@ -72,7 +74,7 @@
                     <div class="card-body">
                     <a href="{{ product.get_absolute_url }}" style="color: black;">
                       <h5 class="card-title">{{ product.name }}</h5>
-                      <p class="card-text">{{ product.description|truncatechars:50  }}</p>
+                      <p class="card-text">R${{ product.price }}</p>
                     </a>
                     </div>
                   </div>
@@ -80,10 +82,11 @@
               </div>
             {% endfor %}
         </div>
-    </div>
+    </div-->
     
     <!--Preço-->
     <div class="container">
+      <h2>Melhor preço</h2>
         <div class="card-deck">
             {% for product in product_list_preco %}
             <div class="card">
@@ -97,7 +100,8 @@
               <div class="card-body d-flex flex-column justify-content-between">
                 <a class="text-decoration-none text-dark" href="{{ product.get_absolute_url }}">
                   <h5 class="card-title">{{ product.name }}</h5>
-                  <p class="card-text">{{ product.description|truncatechars:50  }}</p>
+                  <p class="card-text">R${{ product.price }}</p>
+                  <!--p class="card-text">{{ product.description|truncatechars:50  }}</p-->
                 </a>
               </div>
             </div>

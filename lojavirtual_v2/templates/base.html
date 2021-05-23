@@ -10,7 +10,7 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" 
         integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
-
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css">
     <!-- Folhas de estilo -->
     <!--link rel="stylesheet" href="{% static 'css/style.css' %}" /-->
     <link rel="stylesheet" href="{% static 'css/estilo.css' %}">
@@ -55,22 +55,28 @@
                 <a class="nav-link" href="{{ cat.get_absolute_url }}">{{ cat.name }}</a>
                 </li>
                 {% endfor %}
+                <li class="nav-item {% if request.path ==  '/products/list' %} active {%endif%}">
+                    <a class="nav-link" href="{% url 'products:list' %}">Todas as categorias</a>
+                </li>
                
             </ul>
             <form class="form-inline my-2 my-lg-0" method="GET" action="{% url 'products:list' %}">
-                <input class="form-control mr-sm-2" type="search" name="procurar" placeholder="Encontre aqui o que precisa" aria-label="Search" value="{{ request.GET.search }}">
-                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Buscar</button>
+                <input class="form-control mr-sm-2" type="search" name="procurar" placeholder="Pesquisar" aria-label="Search" value="{{ request.GET.search }}">
+                <button class="btn btn-outline-dark my-2 my-sm-0" type="submit">
+                      <i class="bi-search" role="img" aria-label="Search"></i>
+                </button>
             </form>
         </div>
     </nav>
 
     {% block content %}
     {% endblock content %}
-    <footer class="blog-footer">
-        <p>Desenvolvido por <a href="https://getbootstrap.com/">Bootstrap</a> by <a href="https://twitter.com/mdo">@mdo</a>.</p>
+    <footer class="blog-footer">     
         <p>
-          <a href="#">Voltar ao topo</a>
+          <a href="#"><img src="{% static 'images/logo001.png' %}" alt="Lu's Artes" style="width: 10%;"></a>
         </p>
+        <i class="bi bi-mailbox"> comercial@lusartes.com.br</i>
+
       </footer>
 
    <!-- Option 1: jQuery and Bootstrap Bundle (includes Popper) -->
